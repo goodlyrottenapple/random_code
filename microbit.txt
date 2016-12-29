@@ -87,4 +87,52 @@ input.onGesture(Gesture.Shake, () => {
     basic.clearScreen()
 })
 
+----------------------------------------------------------
+Binary:
+----------------------------------------------------------
 
+function int2bin(x: number): number[] {
+    let res: number[] =[]
+    while (x >= 1) {
+        res.push(x % 2)
+        x = x / 2
+    }
+    return res
+}
+
+function showBin(x: number, row: number) {
+    let arr = int2bin(x)
+    //clear the row
+    for (let i = 0; i < 5; i++) {
+        led.unplot(i, row)
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] == 1) {
+            led.plot(4 - i, row)
+        }
+    }
+}
+
+let x = 0
+let y = 0
+
+input.onButtonPressed(Button.A, () => {
+    x = ((x + 1) % 16)
+    showBin(x, 0)
+})
+
+input.onButtonPressed(Button.B, () => {
+    y = ((y + 1) % 16)
+    showBin(y, 1)
+})
+
+input.onButtonPressed(Button.AB, () => {
+    showBin(x + y, 2)
+})
+
+input.onShake(() => {
+    x = 0
+    y = 0
+    basic.clearScreen()
+})
