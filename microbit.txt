@@ -1,0 +1,90 @@
+----------------------------------------------------------
+Happy bday:
+----------------------------------------------------------
+
+let play = false
+input.onButtonPressed(Button.A, () => {
+    play = true
+})
+basic.forever(() => {
+    if (play) {
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.D, music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.F, music.beat(BeatFraction.Whole))
+        music.playTone(Note.E, music.beat(BeatFraction.Whole))
+        music.rest(music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.D, music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.G, music.beat(BeatFraction.Whole))
+        music.playTone(Note.F, music.beat(BeatFraction.Whole))
+        music.rest(music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.C, music.beat(BeatFraction.Whole))
+        music.playTone(Note.A, music.beat(BeatFraction.Whole))
+        music.playTone(Note.F, music.beat(BeatFraction.Whole))
+        music.playTone(Note.E, music.beat(BeatFraction.Whole))
+        music.playTone(Note.D, music.beat(BeatFraction.Whole))
+        music.rest(music.beat(BeatFraction.Whole))
+        music.playTone(Note.A, music.beat(BeatFraction.Whole))
+        music.playTone(Note.A, music.beat(BeatFraction.Whole))
+        music.playTone(Note.B, music.beat(BeatFraction.Whole))
+        music.playTone(Note.F, music.beat(BeatFraction.Whole))
+        music.playTone(Note.G, music.beat(BeatFraction.Whole))
+        music.playTone(Note.F, music.beat(BeatFraction.Whole))
+        play = false
+    }
+})
+
+----------------------------------------------------------
+Spaceship:
+----------------------------------------------------------
+
+let sprite = game.createSprite(2, 4)
+let spaceship = game.createSprite(Math.random(5), 0)
+// spaceship.setBlink(10)
+spaceship.turn(Direction.Right, 90)
+input.onButtonPressed(Button.A, () => {
+    sprite.move(-1)
+})
+
+
+basic.forever(() => {
+    spaceship.move(1)
+    if (sprite.isTouching(spaceship)) {
+        game.gameOver()
+    }
+    basic.pause(1000)
+    if (spaceship.get(LedSpriteProperty.Y) == 4) {
+        spaceship.set(LedSpriteProperty.X, Math.random(5))
+        spaceship.set(LedSpriteProperty.Y, 0)
+        basic.pause(1000)
+    }
+})
+
+----------------------------------------------------------
+Calculator:
+----------------------------------------------------------
+
+let x = 0
+let sum = 0
+input.onButtonPressed(Button.A, () => {
+    x = (x + 1) % 10
+    basic.showNumber(x)
+})
+input.onButtonPressed(Button.B, () => {
+    sum = sum + x
+    x = 0
+    basic.showNumber(sum)
+})
+input.onGesture(Gesture.Shake, () => {
+    x = 0
+    sum = 0
+    basic.clearScreen()
+})
+
+
